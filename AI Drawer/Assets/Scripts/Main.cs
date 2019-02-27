@@ -6,12 +6,14 @@ using System.Runtime.InteropServices;
 public class Main : MonoBehaviour {
 
     public static Main inst;
+    public float drawSpeed = 1f;
     public List<Brush> generatedBrushes = new List<Brush>();
     [Range(0,16)]
     public int spawnBrushesCount;
     public bool mirrorX;
     public float brushHueOffset = .1f;
     public Camera renderCam;
+    
 
     public GameObject background;
     public GameObject brushPrefab;
@@ -27,8 +29,8 @@ public class Main : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.F)) Time.timeScale = 3;
-        if (Input.GetKeyUp(KeyCode.F)) Time.timeScale = 1;
+        if (Input.GetKeyDown(KeyCode.F)) Time.timeScale = drawSpeed * 2;
+        if (Input.GetKeyUp(KeyCode.F)) Time.timeScale = drawSpeed;
         //if (Input.GetMouseButtonDown(0)) { Time.timeScale = Time.timeScale > 0 ? 0 : 1; Debug.Log(Time.timeScale); }
         //if (Input.GetMouseButtonDown(1)) StartCoroutine(SaveCameraView());
         //if (Input.GetMouseButtonDown(1)) { SaveWebGLScreenshot(); Debug.Log("screenshot"); }
@@ -40,7 +42,7 @@ public class Main : MonoBehaviour {
         background.SetActive(false);
     }
 
-    [DllImport("__Internal")]
+    /*[DllImport("__Internal")]
     private static extern void DownloadFile(byte[] array, int byteLength, string fileName);
 
     public void SaveWebGLScreenshot() {
@@ -85,7 +87,7 @@ public class Main : MonoBehaviour {
         var fileTotal = System.IO.Directory.GetFiles(path).Length;
         System.IO.File.WriteAllBytes(path + "/screenshot" + fileTotal + ".png", bytes);
         Debug.Log("File saved to " + path + "/screenshot" + fileTotal + ".png");
-    }
+    }*/
 
 
 }
