@@ -48,10 +48,8 @@ public class Brush : MonoBehaviour {
         sprRen.color = col;
 
         //Mirror X
-        if (mirrorX && mirrorXBrush) {
-            mirrorXBrush.position = new Vector3(-transform.position.x, transform.position.y, 0);
-            mirrorXBrush.localScale = transform.localScale;
-            mirrorXBrush.GetComponent<SpriteRenderer>().color = col;
+        if (mirrorX) {
+            UpdateMirrorBrush(col);
         }
 
         //Bouce Off Walls
@@ -75,9 +73,17 @@ public class Brush : MonoBehaviour {
     IEnumerator Init() {
         yield return new WaitForSeconds(1f);
         transform.position = new Vector3(Random.Range(-7, 7), Random.Range(-4, 4));
-        sprRen.enabled = true;
         ResetBrush();
         StartBrushing();
+        sprRen.enabled = true;
+        if (mirrorX) UpdateMirrorBrush(sprRen.color);
+    }
+    public void UpdateMirrorBrush(Color col) {
+        if (mirrorXBrush) {
+            mirrorXBrush.position = new Vector3(-transform.position.x, transform.position.y, 0);
+            mirrorXBrush.localScale = transform.localScale;
+            mirrorXBrush.GetComponent<SpriteRenderer>().color = col;
+        }
     }
 
     public void ResetBrush() {
@@ -117,6 +123,7 @@ public class Brush : MonoBehaviour {
             default:
                 return null;
         }
+        
     }
 
     public IEnumerator RandomBrush() {

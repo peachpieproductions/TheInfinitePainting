@@ -20,6 +20,12 @@ public class Main : MonoBehaviour {
     public GameObject photoBrushPrefab;
     public GameObject dumbBrushPrefab;
 
+    private void Awake() {
+#if !UNITY_EDITOR && UNITY_WEBGL
+    WebGLInput.captureAllKeyboardInput = false;
+#endif
+    }
+
     private void Start() {
         inst = this;
         StartCoroutine(ColorBackground());
