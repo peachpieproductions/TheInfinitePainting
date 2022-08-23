@@ -42,7 +42,7 @@ public class Brush : MonoBehaviour {
 
         //Color
         hue = (hue + Time.deltaTime * .01f * hueSpeedMult) % 1;
-        var col = Color.HSVToRGB(hue, 1, 1);
+        var col = Color.HSVToRGB(hue, .7f, 1);
         if (greyscale) col = Color.white * hue;
         col.a = alpha;
         sprRen.color = col;
